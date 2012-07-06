@@ -6,8 +6,24 @@
 //////////////////////////////////////////////////////////
 // Global constants for app
 //////////////////////////////////////////////////////////
+
+var _ = require('underscore');
+
+var localParams;
+try {
+	localParams = require("./local-params");
+} catch (err) {
+	localParams = {};
+}
+var locals = _.extend({
+	global:{},
+	dev:{},
+	testing:{},
+	production:{}
+}, localParams)
+
 var global =
-	{
+	_.extend({
 			'name'							: 'APP NAME'
 		, 'website'						: 'http://www.appinfosite.com'
 		, 'logo'							: ''
@@ -26,14 +42,14 @@ var global =
 															, 'spinsleeptime': 1000
 															, 'options': []
 														}
-	};
+	}, locals.global);
 
 
 //////////////////////////////////////////////////////////
 // Development environment properties
 //////////////////////////////////////////////////////////
 var dev =
-	{
+	_.extend({
 			'url' 							: 'http://www.appsite.com'
 		, 'sessionSecret'			: 'randomString123'
 		// Database connections
@@ -51,33 +67,33 @@ var dev =
 																, 'callback_url'	: 'http://localhost:3000/api/users/services/foursquare/callback'
 															}
 														}
-	};
+	}, locals.dev);
 	
 	
 //////////////////////////////////////////////////////////
 // Testing environment properties
 //////////////////////////////////////////////////////////
 var testing =
-	{
+	_.extend({
 			'url' 							: 'http://www.appsite.com'
 		, 'sessionSecret'			: 'randomString123'
 		// Database connections
 		, 'mongoStore' 				: 'mongodb://localhost/dbname'
 		, 'redisSession' 			: 'redis://user:password@localhost:6379'
-	};
+	}, locals.testing);
 
 
 //////////////////////////////////////////////////////////	
 // Production environment properties
 //////////////////////////////////////////////////////////
 var production =
-	{
+	_.extend({
 			'url' 							: 'http://www.appsite.com'
 		, 'sessionSecret'			: 'randomString123'
 		// Database connections
 		, 'mongoStore' 				: 'mongodb://localhost/dbname'
 		, 'redisSession' 			: 'redis://user:password@localhost:6379'
-	};
+	}, locals.production);
 
 
 
@@ -86,4 +102,3 @@ var production =
 *********************************************************/
 
 module.exports = {'global': global, 'dev': dev, 'testing': testing, 'production': production };
-
