@@ -1,0 +1,671 @@
+<html>
+<head>
+	<title>INFANTRY Dashboard</title>
+	<style type="text/css">
+	body { width: 2000px; background-color: #fdfdfd; font-family: Arial; font-size: 12px; }
+	.forms { width:300px; margin:5px; text-align:right; border-right:0px solid #aaa; padding-right: 10px; float: left;}
+	.text { float:left; width:300px; margin:5px; text-align:left; border-right:0px solid #aaa; padding: 10px; background-color: #eee; }
+	.header { background-color: #d0d0d0; margin: 0px 0 0px 0; padding: 10px;}
+	h1 { color:#000099; font-size:28px; padding: 0; margin: 0; }
+	h2 { color:#000066; font-size:20px; padding: 0; margin: 0; font-weight: bold;}
+	h3 { font-size:14px; padding: 4px 0px 0 0;  margin: 0;  font-weight: normal;}
+	h4 { font-size:12px; padding: 4px 0px 0 0;  margin: 0;  font-weight: normal;}
+	form { border: 4px solid #d0d0d0; margin-bottom: 30px;}
+	input { width: 150px; margin-right: 4px;}
+	.button { width: 70px;}
+	.section { font-weight: bold; background-color: #e0e0e0; padding: 4px; }
+	.sectionBottom { font-weight: bold; background-color: #d0d0d0; padding: 8px 4px 4px 4px; margin-top: 10px;}
+	.note { margin-left: auto; width: 150px; font-size: 9px; color: #999; margin-bottom: 3px; margin-right: 4px; text-align: left;}
+	</style>
+</head>
+<body>
+	<div class="forms">
+
+		<div class="header"> 
+			<h2>Create User</h2>
+			<h3>/users</h3>
+			<h4>(PUT)</h4>
+		</div>
+		<form action="http://<domain>/users" method="POST"  enctype="multipart/form-data"> 
+			<div class="section">required</div>
+			<br>
+			username: <input name="username" type="text" value=""/><br>
+			password: <input name="password" type="text" value="" /><br>
+			email: <input name="email" type="text" value="" /><br>
+			
+			<br>
+			<div class="section">optional</div>
+			<br>
+			fName: <input name="fName" type="text" value="" /><br>
+			lName: <input name="lName" type="text" value="" /><br>
+			fullName: <input name="fullName" type="text" /><br>
+			city: <input name="city" type="text" value="" /><br>
+			state: <input name="state" type="text" value="" /><br>
+			postal: <input name="postal" type="text" value="" /><br>
+			country: <input name="country" type="text" value="" /><br>
+			phone: <input name="phone" type="text" value="" /><br>
+			gender: <input name="gender" type="" value="" /><br>
+				<div class="note">[male, female, unknown]</div>
+			birthYear: <input name="birthYear" type="text" value="" /><br>
+				<div class="note">1900 - current year</div>
+			role: <input name="role" type="text" value="normal" /><br>
+				<div class="note">[normal, guest, super, admin, partner, partner-admin, celebrity]</div>
+			photo (file): <input name="photo" type="file"/>
+				<div class="note">multipart/form-data if uploading photo</div>
+			optKeys (,): <input name="optKeys" type="text" value=""/><br>
+			optValues (,): <input name="optValues" type="text" value=""/><br>
+			followAuto [true,false]: <input name="followAuto" type="text" value=""/><br>
+				<div class="note">followAuto is a hardcoded option key</div>
+			token: <input name="token" type="text"/><br>
+				<div class="note">token is required for role != 'normal'</div>
+			
+			<br>
+			<div class="section">flags</div>
+			<br>
+			notify [true]: <input name="notify" type="text"/><br>
+			<div class="note">User will be redirected to the specified endpoint</div>
+			
+			<input type="hidden" name="_method" value="PUT" />
+			<div class="sectionBottom"><div class="sectionBottom"><input type="submit" class="button"/></div></div>
+		</form>
+			
+		<div class="header"> 	
+			<h2>Get User 'self'</h2>
+			<h3>/users</h3>
+			<h4>(GET)</h4>
+		</div>
+		<form action="http://<domain>/users" method="GET"> 
+			<div class="section">required</div>
+			<br>
+			token: <input name="token" type="text" /><br>
+			<div class="sectionBottom"><input type="submit" class="button"/></div>
+		</form>
+			
+		
+		<div class="header"> 
+			<h2>Update User 'Self'</h2>
+			<h3>/users</h3>
+			<h4>(POST)</h4>
+		</div>
+		<form action="http://<domain>/users" method="POST"  enctype="multipart/form-data"> 
+			<div class="section">required</div>
+			<br>
+			token: <input name="token" type="text" /><br>
+			<br>
+			<div class="section">at least one of</div>
+			<br>
+			fName: <input name="fName" type="text" value="" /><br>
+			lName: <input name="lName" type="text" value="" /><br>
+			fullName: <input name="fullName" type="text" /><br>
+			city: <input name="city" type="text" value="" /><br>
+			state: <input name="state" type="text" value="" /><br>
+			postal: <input name="postal" type="text" value="" /><br>
+			country: <input name="country" type="text" value="" /><br>
+			phone: <input name="phone" type="text" value="" /><br>
+			email: <input name="email" type="text" value="" /><br>
+			gender: <input name="gender" type="" value="" /><br>
+				<div class="note">[male, female, unknown]</div>
+			birthYear: <input name="birthYear" type="text" value="" /><br>
+				<div class="note">1900 - current year</div>
+			photo (file): <input name="photo" type="file"/>
+				<div class="note">multipart/form-data if uploading photo</div>
+			optKeys (,): <input name="optKeys" type="text" value=""/><br>
+			optValues (,): <input name="optValues" type="text" value=""/><br>
+			followAuto [true]: <input name="followAuto" type="text" value=""/><br>
+				<div class="note">followAuto is a hardcoded option key</div>
+			
+			<div class="sectionBottom"><input type="submit" class="button"/></div>
+		</form>
+		
+		<div class="header">
+			<h2>Delete User 'self'</h2>
+			<h3>/users</h3>
+			<h4>(DELETE)</h4>
+		</div>
+		<form action="http://<domain>/users" method="POST"> 
+			<div class="section">required</div>
+			<br>
+			token: <input name="token" type="text" /><br>
+			password: <input name="password" type="text" value="temp" /><br>
+				<div class="note">token and password must match user</div>
+			
+			<input type="hidden" name="_method" value="DELETE" />
+			<div class="sectionBottom"><input type="submit" class="button"/></div>
+		</form>
+		
+	</div>
+	<div class="forms">		
+		
+		<div class="header">
+			<h2>User Search</h2>
+			<h3>/users/search</h3>
+			<h4>(GET)</h4>
+		</div>
+		<form action="http://<domain>/users/search" method="GET"> 
+			<div class="section">required</div>
+			<br>
+			token: <input name="token" type="text"/><br>
+			<br>
+			<div class="section">at least one of</div>
+			<br>
+			uID (_id,): <input name="uID" type="text" /><br>
+			fullName: <input name="fullName" type="text" /><br>
+			city: <input name="city" type="text" /><br>
+			state: <input name="state" type="text" /><br>
+			postal: <input name="postal" type="text" value="" /><br>
+			country: <input name="country" type="text" value="" /><br>
+			phone: <input name="phone" type="text" /><br>
+			email: <input name="email" type="text" /><br>
+			<br>
+			<div class="section">optional</div>
+			<br>
+			limit (#): <input name="limit" type="text" /><br>
+			page (#): <input name="page" type="text" /><br>
+			
+			<div class="sectionBottom"><input type="submit" class="button"/></div>
+		</form>
+		
+		<div class="header">
+			<h2>Check Username</h2>
+			<h3>/users/usersname</h3>
+			<h4>(GET)</h4>
+		</div>
+		<form action="http://<domain>/users/usersname" method="GET">
+			<div class="section">required</div>
+			<br>
+			username: <input name="username" type="text" value=""/><br>
+			
+			<div class="sectionBottom"><input type="submit" class="button"/></div>
+		</form>
+		
+		<div class="header">
+			<h2>Login / Get Token for 'self'</h2>
+			<h3>/users/login</h3>
+			<h4>(GET)</h4>
+		</div>
+		<form action="http://<domain>/users/login" method="GET"> 
+			<div class="section">required</div>
+			<br>
+			username: <input name="username" type="text"/><br>
+			password: <input name="password" type="text" value="" /><br>
+			
+			<div class="sectionBottom"><input type="submit" class="button"/></div>
+		</form>
+		
+		<div class="header">
+			<h2>Get New Token for 'self'</h2>
+			<h3>/users/login</h3>
+			<h4>(POST)</h4>
+		</div>
+		<form action="http://<domain>/users/login" method="POST"> 
+			<div class="section">required</div>
+			<br>
+			username: <input name="username" type="text"/><br>
+			password: <input name="password" type="text" value="" /><br>
+			<div class="sectionBottom"><input type="submit" class="button"/></div>
+		</form>
+		
+		
+		<div class="header">
+			<h2>Change Password for 'self'</h2>
+			<h3>/users/changepassword</h3>
+			<h4>(POST)</h4>
+		</div>
+		<form action="http://<domain>/users/changepassword" method="POST"> 
+			<div class="section">required</div>
+			<br>
+			username: <input name="username" type="text"/><br>
+			password: <input name="password" type="text" value="temp" /><br>
+			pwNew: <input name="pwNew" type="text" value="newpw" /><br>
+				<div class="note">token must match username/password user</div>
+			<div class="sectionBottom"><input type="submit" class="button"/></div>
+		</form>
+		
+		<div class="header">
+			<h2>Forgot Username</h2>
+			<h3>/users/forgotusername</h3>
+			<h4>(GET)</h4>
+		</div>
+		<form action="http://<domain>/users/forgotusername" method="GET"> 
+			<div class="section">required</div>
+			<br>
+			email: <input name="email" type="text"/><br>
+			<br>
+			<div class="section">optional</div>
+			<br>
+			notify [true]: <input name="notify" type="text"/><br>
+				<div class="note">User will be redirected to the specified endpoint</div>
+			<div class="sectionBottom"><input type="submit" class="button"/></div>
+		</form>
+		
+		<div class="header">
+			<h2>Forgot Password</h2>
+			<h3>/users/forgotpassword</h3>
+			<h4>(GET)</h4>
+		</div>
+		<form action="http://<domain>/users/forgotpassword" method="GET"> 
+			<div class="section">required</div>
+			<br>
+			username: <input name="username" type="text"/><br>
+			email: <input name="email" type="text"/><br>
+			<br>
+			<div class="section">optional</div>
+			<br>
+			notify [true]: <input name="notify" type="text"/><br>
+				<div class="note">User will be redirected to the specified endpoint</div>
+			<div class="sectionBottom"><input type="submit" class="button"/></div>
+		</form>
+
+		
+	</div>
+	<div class="forms">			
+		
+		<div class="header">
+			<h2>Get User 'USER_ID'</h2>
+			<h3>/users/users_ID</h3>
+			<h4>(GET)</h4>
+		</div>
+		<form action="" method="GET"> 
+			<div class="section">url param</div>
+			<br>
+			USER_ID: <input name="theId" type="text"/><br>
+			<br>
+			<div class="section">required</div>
+			<br>
+			token: <input name="token" type="text"/><br>
+			<div class="sectionBottom"><input type="submit" class="button"onclick="this.form.action='http://<domain>/users/' + this.form.theId.value" /></div>
+		</form>
+		
+		<div class="header"> 
+			<h2>Update User 'USER_ID'</h2>
+			<h3>/users/users_ID</h3>
+			<h4><b>Admin Only</b> (POST)</h4>
+		</div>
+		<form action="" method="POST"  enctype="multipart/form-data"> 
+			<div class="section">url param</div>
+			<br>
+			USER_ID: <input name="theId" type="text"/><br>
+			<br>
+			<div class="section">at least one of</div>
+			<br>
+			fName: <input name="fName" type="text" value="" /><br>
+			lName: <input name="lName" type="text" value="" /><br>
+			city: <input name="city" type="text" value="" /><br>
+			state: <input name="state" type="text" value="" /><br>
+			phone: <input name="phone" type="text" value="" /><br>
+			email: <input name="email" type="text" value="" /><br>
+			gender: <input name="gender" type="" value="" /><br>
+				<div class="note">[male, female, unknown]</div>
+			birthYear: <input name="birthYear" type="text" value="" /><br>
+				<div class="note">1900 - current year</div>
+			role: <input name="role" type="text" value="normal" /><br>
+				<div class="note">[normal, guest, super, admin, partner, partner-admin, celebrity]</div>
+			photo (file): <input name="photo" type="file"/>
+				<div class="note">multipart/form-data if uploading photo</div>
+			followAuto [true]: <input name="followAuto" type="text" value=""/><br>
+			
+			<div class="sectionBottom"><input type="submit" class="button"onclick="this.form.action='http://<domain>/users/' + this.form.theId.value" /></div>
+		</form>
+		
+		<div class="header">
+			<h2>Delete User 'USER_ID'</h2>
+			<h3>/users/users_ID</h3>
+			<h4><b>Admin Only</b> (DELETE)</h4>
+		</div>
+		<form action="http://<domain>/users" method="POST">
+			<div class="section">url param</div>
+			<br>
+			USER_ID: <input name="theId" type="text"/><br> 
+			<br>
+			<div class="section">required</div>
+			<br>
+			token: <input name="token" type="text" /><br>
+			<input type="hidden" name="_method" value="DELETE" />
+			<div class="sectionBottom"><input type="submit" class="button"onclick="this.form.action='http://<domain>/users/' + this.form.theId.value" /></div>
+		</form>
+		
+	</div>
+	
+							    
+	<div class="forms">	
+	
+		<div class="header"> 
+			<h2>Foursquare<br>Add</h2>
+			<h3>/users/services/foursquare</h3>
+			<h4>(POST)</h4>
+		</div>
+		<form action="http://<domain>/users/services/foursquare" method="POST"> 
+			<div class="section">required</div>
+			<br>
+			token: <input name="token" type="text" /><br>
+			<div class="sectionBottom"><input type="submit" class="button"/></div>
+		</form>
+	
+		<div class="header"> 
+			<h2>Instagram<br>Add</h2>
+			<h3>/users/services/instagram</h3>
+			<h4>(POST)</h4>
+		</div>
+		<form action="http://<domain>/users/services/instagram" method="POST"> 
+			<div class="section">required</div>
+			<br>
+			token: <input name="token" type="text" /><br>
+			<div class="sectionBottom"><input type="submit" class="button"/></div>
+		</form>
+		
+		<div class="header"> 
+			<h2>Foursquare<br>Add</h2>
+			<h3>/users/services/foursquare</h3>
+			<h4>(POST)</h4>
+		</div>
+		<form action="http://<domain>/users/services/foursquare" method="POST"> 
+			<div class="section">required</div>
+			<br>
+			token: <input name="token" type="text" /><br>
+			<div class="sectionBottom"><input type="submit" class="button"/></div>
+		</form>
+		
+	
+		<div class="header"> 
+			<h2>Foursquare<br>Register / Login / Add</h2>
+			<h3>/users/services/foursquare</h3>
+			<h4>(POST)</h4>
+		</div>
+		<form action="http://<domain>/users/services/foursquare" method="POST"> 
+			<div class="section">optional</div>
+			<br>
+			username: <input name="username" type="text" /><br>
+			password: <input name="password" type="text" /><br>
+			<br>
+			<div class="section">flags</div>
+			<br>
+			notify [true]: <input name="notify" type="text"/><br>
+			<div class="note">User will be redirected to the specified endpoint</div>
+			
+			<div class="sectionBottom"><input type="submit" class="button"/></div>
+		</form>
+		
+		<div class="header"> 
+			<h2>Foursquare<br>Remove for 'self'</h2>
+			<h3>/users/services/foursquare</h3>
+			<h4>(DELETE)</h4>
+		</div>
+		<form action="http://<domain>/users/services/foursquare" method="POST"> 
+			<div class="section">required</div>
+			<br>
+			token: <input name="token" type="text" /><br>
+			<input type="hidden" name="_method" value="DELETE" />
+			<div class="sectionBottom"><input type="submit" class="button"/></div>
+		</form> 		
+		
+		
+		
+	</div>
+	<div class="forms">
+		
+		
+		<div class="header"> 
+			<h2>Get Meta for 'self'</h2>
+			<h3>/users/meta</h3>
+			<h4>(GET)</h4>
+		</div>
+		<form action="http://<domain>/users/meta" method="GET"> 
+			<div class="section">required</div>
+			<br>
+			token: <input name="token" type="text" /><br>
+			<div class="sectionBottom"><input type="submit" class="button" /></div>
+		</form>
+		
+		
+		<div class="header"> 
+			<h2>Create Meta for 'self'</h2>
+			<h3>/users/meta</h3>
+			<h4>(POST)</h4>
+		</div>
+		<form action="http://<domain>/users/meta" method="POST"> 
+			<div class="section">required</div>
+			<br>
+			token: <input name="token" type="text" /><br>
+			keys (,): <input name="keys" type="text" /><br>
+			values (,): <input name="values" type="text" /><br>
+			<div class='note'>Note: escape commas in 'values' = %2C</div>
+			<div class="sectionBottom"><input type="submit" class="button" /></div>
+		</form>
+		
+		
+		<div class="header"> 
+			<h2>Remove Meta for 'self'</h2>
+			<h3>/users/meta</h3>
+			<h4>(DELETE)</h4>
+		</div>
+		<form action="http://<domain>/users/meta" method="POST"> 
+			<div class="section">required</div>
+			<br>
+			token: <input name="token" type="text" /><br>
+			keys (,): <input name="keys" type="text" /><br>
+			<input type="hidden" name="_method" value="DELETE" />
+			<div class="sectionBottom"><input type="submit" class="button" /></div>
+		</form>
+	
+	
+		<div class="header"> 
+			<h2>Create Meta for 'USER_ID'</h2>
+			<h3>/users/users_ID/meta</h3>
+			<h4><b>Admin Only</b> (POST)</h4>
+		</div>
+		<form action="" method="POST">
+			<div class="section">url param</div>
+			<br>
+			USER_ID: <input name="theId" type="text"/><br> 
+			<br>
+			<div class="section">required</div>
+			<br>
+			token: <input name="token" type="text" /><br>
+			keys (,): <input name="keys" type="text" /><br>
+			values (,): <input name="values" type="text" /><br>
+			<div class='note'>Note: escape commas in 'values' = %2C</div>
+			<div class="sectionBottom"><input type="submit" class="button"onclick="this.form.action='http://<domain>/users/'+ this.form.theId.value + 'meta'" /></div>
+		</form>
+	
+		<div class="header"> 
+			<h2>Get Meta for 'USER_ID'</h2>
+			<h3>/users/users_ID/meta</h3>
+			<h4>(GET)</h4>
+		</div>
+		<form action="" method="GET"> 
+			<div class="section">url param</div>
+			<br>
+			USER_ID: <input name="theId" type="text"/><br>
+			<br>
+			<div class="section">required</div>
+			<br>
+			token: <input name="token" type="text" /><br>
+			<div class="sectionBottom"><input type="submit" class="button"onclick="this.form.action='http://<domain>/users/'+ this.form.theId.value + 'meta'" /></div>
+		</form>
+
+		<div class="header"> 
+			<h2>Remove Meta for 'USER_ID'</h2>
+			<h3>/users/users_ID/meta</h3>
+			<h4><b>Admin Only</b> (DELETE)</h4>
+		</div>
+		<form action="" method="POST"> 
+			<div class="section">url param</div>
+			<br>
+			USER_ID: <input name="theId" type="text"/><br>
+			<br>
+			<div class="section">required</div>
+			<br>
+			token: <input name="token" type="text" /><br>
+			keys (,): <input name="keys" type="text" /><br>
+			<input type="hidden" name="_method" value="DELETE" />
+			<div class="sectionBottom"><input type="submit" class="button"onclick="this.form.action='http://<domain>/users/'+ this.form.theId.value + 'meta'" /></div>
+		</form>
+		
+		
+	
+	</div>
+	<div class="forms">
+			
+			
+			<div class="header">
+				<h2>Get Requests for 'self'</h2>
+				<h3>/users/requests</h3>
+				<h4>(GET)</h4>
+			</div>
+			<form action="http://<domain>/users/requests" method="GET"> 
+				<div class="section">required</div>
+				<br>
+				token: <input name="token" type="text" /><br>
+				<div class="sectionBottom"><input type="submit" class="button"/></div>
+			</form>
+			
+			<div class="header">
+				<h2>Create request for 'USER_ID' from 'self'</h2>
+				<h3>/users/users_ID/requests'</h3>
+				<h4>(POST)</h4>
+			</div>
+			<form action="" method="POST"> 
+				<div class="section">url param</div>
+				<br>
+				USER_ID: <input name="theId" type="text"/><br> 
+				<br>
+				<div class="section">required</div>
+				<br>
+				token: <input name="token" type="text"/><br>
+				<div class="sectionBottom"><input type="submit" class="button"onclick="this.form.action='http://<domain>/users/' + this.form.theId.value + '/requests'" /></div>
+			</form>
+			
+			
+			
+			<div class="header">
+				<h2>Remove request for 'USER_ID' from 'self'</h2>
+				<h3>/users/users_ID/requests'</h3>
+				<h4>(DELETE)</h4>
+			</div>
+			<form action="" method="POST"> 
+				<div class="section">url param</div>
+				<br>
+				USER_ID: <input name="theId" type="text"/><br> 
+				<br>
+				<div class="section">required</div>
+				<br>
+				token: <input name="token" type="text"/><br>
+				<input type="hidden" name="_method" value="DELETE" />
+				<div class="sectionBottom"><input type="submit" class="button"onclick="this.form.action='http://<domain>/users/' + this.form.theId.value + '/requests'" /></div>
+			</form>
+			
+			<div class="header">
+				<h2>Deny Follow request for 'self'</h2>
+				<h3>/users/requests/deny</h3>
+				<h4>(DELETE)</h4>
+			</div>
+			<form action="http://<domain>/users/requests/deny" method="POST"> 
+				<div class="section">required</div>
+				<br>
+				token: <input name="token" type="text" /><br>
+				uID (_id): <input name="uID" type="text" /><br>
+				<input type="hidden" name="_method" value="DELETE" />
+				<div class="sectionBottom"><input type="submit" class="button"/></div>
+			</form>
+			
+			<div class="header">
+				<h2>Get Following for 'self'</h2>
+				<h3>/users/following</h3>
+				<h4>(GET)</h4>
+			</div>
+			<form action="http://<domain>/users/following" method="GET"> 
+				<div class="section">required</div>
+			<br>
+				token: <input name="token" type="text" /><br>
+				<div class="sectionBottom"><input type="submit" class="button"/></div>
+			</form>
+			
+			<div class="header">
+				<h2>Get 'USER_ID' Following</h2>
+				<h3>/users/users_ID/following</h3>
+				<h4>(GET)</h4>
+			</div>
+			<form action="" method="GET"> 
+				<div class="section">url param</div>
+				<br>
+				USER_ID: <input name="theId" type="text"/><br> 
+				<br>
+				<div class="section">required</div>
+				<br>
+				token: <input name="token" type="text"/><br>
+				<div class="sectionBottom"><input type="submit" class="button"onclick="this.form.action='http://<domain>/users/' + this.form.theId.value + '/following'" /></div>
+			</form>
+			
+			<div class="header">
+				<h2>Create a Follow for 'USER_ID' for 'self'</h2>
+				<h3>/users/users_ID/following'</h3>
+				<h4>(POST)</h4>
+			</div>
+			<form action="" method="POST"> 
+				<div class="section">url param</div>
+				<br>
+				USER_ID: <input name="theId" type="text"/><br> 
+				<br>
+				<div class="section">required</div>
+				<br>
+				token: <input name="token" type="text"/><br>
+				<div class="sectionBottom"><input type="submit" class="button"onclick="this.form.action='http://<domain>/users/' + this.form.theId.value + '/following'" /></div>
+			</form>
+			
+			<div class="header">
+				<h2>Remove follow for 'USER_ID' for 'self'</h2>
+				<h3>/users/users_ID/following'</h3>
+				<h4>(DELETE)</h4>
+			</div>
+			<form action="" method="POST"> 
+				<div class="section">url param</div>
+				<br>
+				USER_ID: <input name="theId" type="text"/><br> 
+				<br>
+				<div class="section">required</div>
+				<br>
+				token: <input name="token" type="text"/><br>
+				optional:<br>
+				friendID: <input name="friendID" type="text"/><br>
+				<input type="hidden" name="_method" value="DELETE" />
+				<div class='note'>If friendID is used and requesting user = requested user, then a following is removed from requesting user's following array.
+				Otherwise the requesting user is removed from the requested user's following array</div>
+				<div class="sectionBottom"><input type="submit" class="button"onclick="this.form.action='http://<domain>/users/' + this.form.theId.value + '/following'" /></div>
+			</form>
+			
+			<div class="header">
+				<h2>Get Followers for 'self'</h2>
+				<h3>/users/followers</h3>
+				<h4>(GET)</h4>
+			</div>
+			<form action="http://<domain>/users/followers" method="GET"> 
+				<div class="section">required</div>
+				<br>
+				token: <input name="token" type="text" /><br>
+				<div class="sectionBottom"><input type="submit" class="button"/></div>
+			</form>
+			
+			<div class="header">
+				<h2>Get Followers for 'USER_ID'</h2>
+				<h3>/users/users_ID/followers</h3>
+				<h4>(GET)</h4>
+			</div>
+			<form action="http://<domain>/users/followers" method="GET"> 
+				<div class="section">url param</div>
+				<br>
+				USER_ID: <input name="theId" type="text"/><br> 
+				<br>
+				<div class="section">required</div>
+				<br>
+				token: <input name="token" type="text" /><br>
+				<div class="sectionBottom"><input type="submit" class="button"onclick="this.form.action='http://<domain>/users/' + this.form.theId.value + '/followers'" /></div>
+			</form>
+			
+	</div>
+
+
+	
+		
+
+</body>
+</html>
